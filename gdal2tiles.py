@@ -2566,6 +2566,20 @@ class GDAL2Tiles(object):
                   // Create OSM layer
                   var osm = new OpenLayers.Layer.OSM("OpenStreetMap");
 
+          """ % args    # noqa
+		  
+            if self.options.xyz:
+                s += """		  
+                  // create TMS Overlay layer
+                   var tmsoverlay = new OpenLayers.Layer.XYZ("XYZ Overlay",
+                      "${z}/${x}/${y}.png", {
+                      transitionEffect: 'resize',
+                      isBaseLayer: false
+                  });
+				  
+		        """ % args    # noqa
+            else:
+                s += """		  
                   // create TMS Overlay layer
                    var tmsoverlay = new OpenLayers.Layer.TMS("TMS Overlay", "",
                   {
@@ -2576,6 +2590,10 @@ class GDAL2Tiles(object):
                       isBaseLayer: false,
                       getURL: getURL
                   });
+				  
+		        """ % args    # noqa		  
+		  
+            s += """  
                   if (OpenLayers.Util.alphaHack() == false) {
                       tmsoverlay.setOpacity(0.7);
                   }
@@ -2662,7 +2680,7 @@ class GDAL2Tiles(object):
               }
         """ % args
 
-        if self.options.profile == 'mercator':
+        if self.options.profile == 'mercator' and self.options.xyz is None:
             s += """
               function getURL(bounds) {
                   bounds = this.adjustBounds(bounds);
