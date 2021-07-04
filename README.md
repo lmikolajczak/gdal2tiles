@@ -1,3 +1,6 @@
+IMPORTANT: This fork of `gdal2tiles` script is obsolete, the `--xyz` option has been added in the source repo [OSGeo/gdal - changelog](https://github.com/OSGeo/gdal/blob/v3.1.0/gdal/NEWS#L159) and it's recommended to use `gdal2tiles` directly from there.
+
+
 ## 🗺️ gdal2tiles
 
 Generates directory with TMS or XYZ tiles, KMLs and simple web viewers with multithreading support.
